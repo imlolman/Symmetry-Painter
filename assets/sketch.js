@@ -50,7 +50,7 @@ function mousePressed() {
 }
 
 function touchStarted(touch) {
-    if( touch.touches[0].clientY <  windowHeight - 50){
+    if( touch.touches[0].clientY > 50){
         x = touch.touches[0].clientX - width / 2;
         y = touch.touches[0].clientY - height / 2;
         px = touch.touches[0].clientX - width / 2;
