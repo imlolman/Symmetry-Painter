@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/addons/p5.sound.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <meta charset="utf-8" />
+    <title>Symmetry Painter</title>
+  </head>
+  <body style="background:#2c3e50">
+    <div id="tools">
+      <div style="float:left">
+        <button class="helper-button" style="width: 22px; border-radius: 0px;" onclick="parts--;syncSymmetry();">🡀</button>
+        <div id="symmetry" style="display: inline-block;width: 30px;text-align: center;"></div>
+        <button class="helper-button" style="width: 22px; border-radius: 0px;" onclick="parts++;syncSymmetry();">🡂</button>
+        <button class="helper-button" onclick="s='#2c3e50'">🧼</button>
+        <button class="helper-button" onclick="background('#2c3e50')">🧹</button>
+        <button class="helper-button" onclick="saveCanvas('betterPainter.jpg')">🛒</button>
+      </div>
+      <div style="float:right;padding-right:5px;">
+        <button onclick ="assginColor(this)" class="colorBtn selected" style="background:#ecf0f1"></button>
+        <button onclick ="assginColor(this)" class="colorBtn" style="background:#3498db"></button>
+        <button onclick ="assginColor(this)" class="colorBtn" style="background:#1abc9c"></button>
+        <button onclick ="assginColor(this)" class="colorBtn" style="background:#f1c40f"></button>
+        <button onclick ="assginColor(this)" class="colorBtn" style="background:#e74c3c"></button>
+      </div>
+    </div>
+    <div id="sketch-holder"></div>
+
+    <script src="assets/sketch.js"></script>
+  </body>
+  <script>
+function assginColor(e){
+  document.getElementsByClassName('selected colorBtn')[0].className = 'colorBtn'
+  e.className = 'colorBtn selected'
+  s=e.style.background;
+}
+
+function syncSymmetry(){
+  document.querySelector('#symmetry').innerHTML = parts
+}
+
+syncSymmetry()
+
+document.getElementById("sketch-holder").addEventListener("wheel", resizeBrush);
+
+sp = 0
+
+function resizeBrush(e){
+  threshHold = 10
+  sp+=e.wheelDeltaY
+  if(sp > threshHold){
+    sp = 0
+    parts+=1
+  }
+  if(sp < -threshHold){
+    sp = 0
+    parts-=1
+  }
+  syncSymmetry()
+}
+</script>
+</html>
