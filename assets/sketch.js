@@ -17,7 +17,7 @@ function setup() {
 
 function draw() {
     translate(width / 2, height / 2)
-    if (mouseIsPressed && mouseY < 50) {
+    if (mouseIsPressed && mouseY > 50) {
         var targetX = mouseX - width / 2,
             targetY = mouseY - height / 2;
         x += (targetX - x) * easing;
